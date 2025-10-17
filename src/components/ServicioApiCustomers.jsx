@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Global from '../Global'
 
 export default class ServicioApiCustomers extends Component {
 
@@ -7,12 +8,12 @@ export default class ServicioApiCustomers extends Component {
         customers: []
     }
 
-    url = "https://services.odata.org/V4/Northwind/Northwind.svc/customers"
+    url = Global.urlNorthwind
     //Creamos un metodo para cargar los clientes
 
     loadcustomers = () => {
         console.log("Antes del servicio")
-        axios.get(this.url).then(response => {
+        axios.get(this.url + Global.customers).then(response => {
             console.log("Leyendo servicio")
             //La información viene en response.data
            this.setState({

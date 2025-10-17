@@ -1,10 +1,11 @@
 import axios from 'axios'
 import react from 'react'
+import Global from '../Global'
 import React, { Component } from 'react'
 
 export default class ServiceApiSuppliers extends Component {
 
-  url = "https://services.odata.org/V4/Northwind/Northwind.svc/Suppliers"
+  url = Global.urlNorthwind
   cajaid = React.createRef()
 
   state = {
@@ -15,7 +16,7 @@ export default class ServiceApiSuppliers extends Component {
   loadSuppliers = () =>{
 
     console.log("Cargando proveedores...")
-    axios.get(this.url).then(response=>{
+    axios.get(this.url + Global.suppliers).then(response=>{
       console.log("Provedoores recibidos!")
       this.setState({
         suppliers: response.data.value
