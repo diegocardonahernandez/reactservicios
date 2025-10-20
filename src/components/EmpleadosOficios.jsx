@@ -16,7 +16,7 @@ export default class EmpleadosOficios extends Component {
         axios.get(Global.urlEmpleados + Global.empleados).then(response => {
             console.log("Datos recibidos")
             let empleados = response.data
-            for(const emp of empleados){
+            for (const emp of empleados) {
                 auxOficios.add(emp.oficio)
             }//CORREGIR ESTOOOOO
             console.log(auxOficios)
@@ -28,10 +28,10 @@ export default class EmpleadosOficios extends Component {
 
     }
 
-    getEmpleadosOficio = () =>{
+    getEmpleadosOficio = () => {
         console.log("Buscando empleados...")
         var oficioSeleccionado = this.cajaOficio.current.value
-        axios.get(Global.urlEmpleados + Global.empleadosOficio + oficioSeleccionado).then(response=>{
+        axios.get(Global.urlEmpleados + Global.empleadosOficio + oficioSeleccionado).then(response => {
             this.setState({
                 empleadosOficio: response.data
             })
@@ -51,31 +51,35 @@ export default class EmpleadosOficios extends Component {
                     Empleados Oficios
                 </h1>
                 <label htmlFor="">Seleccione un Oficio </label>
-                <select name="" id="">
+                <select ref={this.cajaOficio} onChange={this.getEmpleadosOficio}>
                     {
                         this.state.oficios.map((oficio, index) => {
-                            <option value={oficio} key={index}>{oficio}</option>
+                            return <option value={oficio} key={index}>{oficio}</option>
                         })
                     }
                 </select>
-                <table>
+                <table border={1}>
                     <thead>
                         <tr>
                             <th>APELLIDO</th>
                             <th>OFICIO</th>
                             <th>SALARIO</th>
                         </tr>
-                        {/* {
-                            this.state.empleadosOficio.map((empleado,index)=>{
-                                <tr>
+                    </thead>
+                    <tbody>
+                        {
+                            this.state.empleadosOficio != null &&
+                            this.state.empleadosOficio.map((empleado, index) => (
+                                <tr key={index}>
                                     <td>{empleado.apellido}</td>
                                     <td>{empleado.oficio}</td>
                                     <td>{empleado.salario}</td>
                                 </tr>
-                            })
-                        } */}
-                    </thead>
+                            ))
+                        }
+                    </tbody>
                 </table>
+
             </div>
         )
     }
