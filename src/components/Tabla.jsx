@@ -23,6 +23,12 @@ export default class Tabla extends Component {
         this.generarTabla()
     }
 
+    componentDidUpdate = (oldProps)=> {
+        if(oldProps.numero != this.props.numero){
+            this.generarTabla()
+        }
+    }
+
     render() {
         return (
             <div>

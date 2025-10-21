@@ -5,6 +5,7 @@ import Home from '../Home'
 import NotFound from '../NotFound'
 import { useParams } from 'react-router-dom'
 import Collatz from './Collatz'
+import Menurutas from './Menurutas'
 export default class Router extends Component {
     render() {
 
@@ -20,6 +21,7 @@ export default class Router extends Component {
 
         return (
             <BrowserRouter>
+            <Menurutas/>
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/tabla/:minumero"

@@ -14,7 +14,7 @@ export default class Collatz extends Component {
                 numero = numero / 2
                 aux.push(numero)
             } else {
-                numero = numero * 3 +1
+                numero = numero * 3 + 1
                 aux.push(numero)
             }
         }
@@ -24,8 +24,14 @@ export default class Collatz extends Component {
 
     }
 
-    componentDidMount = () =>{
+    componentDidMount = () => {
         this.generarCollatz()
+    }
+
+    componentDidUpdate = (oldProps) => {
+        if (oldProps.numero != this.props.numero) {
+            this.generarCollatz()
+        }
     }
 
     render() {
