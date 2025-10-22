@@ -10,7 +10,8 @@ export default class HospitalesMultiples extends Component {
     
     state = {
         hospitales: [],
-        hospitalesSeleccionados: []
+        hospitalesSeleccionados: [],
+        salariosActualizados: false
     }
 
     loadHospitales = () => {
@@ -61,17 +62,24 @@ export default class HospitalesMultiples extends Component {
 
         axios.put(Global.apiTrabajadores+request).then(response=>{
             console.log("Salarios actualizados correctamente!")
+            this.setState({
+                salariosActualizados: true
+            })
         })
-
-
     }
 
+    updateDatosTrabajadores = (newValor) =>{
+        this.setState({
+            salariosActualizados: newValor
+        })
+    }
+ 
     render() {
         return (
             <div>
                 <h1 className='text-center p-3'>Hospitales Múltiples</h1>
                 <form className='w-50 mx-auto'>
-                    <select multiple ref={this.selectHospital} className='form-control '>
+                    <select multiple size={6} ref={this.selectHospital} className='form-control '>
 
                         {this.state.hospitales.map((hosp, index) => {
                             return (
@@ -93,7 +101,8 @@ export default class HospitalesMultiples extends Component {
 
                         {
                             this.state.hospitalesSeleccionados.length != 0 &&
-                            <Trabajadores idhospitales={this.state.hospitalesSeleccionados}/>
+                            <Trabajadores idhospitales={this.state.hospitalesSeleccionados} salariosStatus={this.state.salariosActualizados}
+                             updateDatosTrabajadores={this.updateDatosTrabajadores}/>
                         }
                         
 

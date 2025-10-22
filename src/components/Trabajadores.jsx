@@ -39,6 +39,9 @@ export default class Trabajadores extends Component {
     componentDidUpdate = (oldProps) =>{
         if(oldProps.idhospitales != this.props.idhospitales){
             this.loadTrabajadores()
+        }else if(oldProps.salariosStatus != this.props.salariosStatus){
+            this.loadTrabajadores()
+            this.props.updateDatosTrabajadores(false)
         }
     }
 
