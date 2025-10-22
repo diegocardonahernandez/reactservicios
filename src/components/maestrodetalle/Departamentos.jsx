@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Global from '../../Global'
+import Global from '../Global'
 import Empleados from './Empleados'
 
 export default class Departamentos extends Component {
