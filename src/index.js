@@ -16,11 +16,12 @@ import Departamentos from './components/maestrodetalle/Departamentos';
 import Tabla from './components/Tabla';
 import Router from './components/Router';
 import Menurutas from './components/Menurutas';
+import HospitalesMultiples from './components/HospitalesMultiples';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <div>
-    <Router />
+    <HospitalesMultiples />
   </div>
 );
 
