@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Trabajadores from './Trabajadores'
 import axios from 'axios'
 import Global from './Global'
+import Swal from 'sweetalert2';
 
 export default class HospitalesMultiples extends Component {
 
@@ -44,26 +45,45 @@ export default class HospitalesMultiples extends Component {
 
     }
 
+    getSelecciones = () => {
+         let aux = []
+        let options = this.selectHospital.current.options
+        for(const option of options){
+            if(option.selected){
+                aux.push(option.value)
+            }
+        }
+        return aux
+    }
+
     updateSalarioEmpleados = (e) =>{
         e.preventDefault()
         console.log("Procesando petición de subida de sueldo...")
         let newsalario = parseInt(this.cajaNewSalario.current.value)
         let hospitalesEmpleados = ""
+        let aux = this.getSelecciones()
 
-        for(const hosp of this.state.hospitalesSeleccionados){
+        for(const hosp of aux){
             hospitalesEmpleados += "idhospital=" + hosp + "&"
         }
 
         hospitalesEmpleados = hospitalesEmpleados.slice(0, hospitalesEmpleados.length -1)
 
         let request = "api/trabajadores/UpdateSalarioTrabajadoresHospitales?incremento="+newsalario+"&"+hospitalesEmpleados
-        console.log(this.state.hospitalesSeleccionados)
+        console.log(aux)
         console.log(request)
 
         axios.put(Global.apiTrabajadores+request).then(response=>{
-            console.log("Salarios actualizados correctamente!")
-            this.setState({
-                salariosActualizados: true
+            Swal.fire({
+                title: "Salarios actualizados correctamente!",
+                text: "Verifiquelo visualmente acontinuación",
+                icon: "success",
+                iconColor: "blue"
+            }).then(()=>{
+                this.setState({
+                    salariosStatus: true,
+                    hospitalesSeleccionados: aux
+                })
             })
         })
     }
